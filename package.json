@@ -1,0 +1,28 @@
+{
+  "name": "forumdb",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/node": "^8.2.5",
+    "@astrojs/ts-plugin": "^1.6.1",
+    "@fastify/middie": "^8.3.0",
+    "@fastify/static": "^7.0.3",
+    "astro": "^4.7.0",
+    "discord.js": "^14.14.1",
+    "fastify": "^4.26.2",
+    "typescript": "^5.4.5",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/cssesc": "^3.0.2",
+    "@types/html-escaper": "^3.0.2"
+  }
+}
