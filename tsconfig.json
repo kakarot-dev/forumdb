@@ -1,6 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    "moduleResolution": "node",
     "plugins": [
       {
         "name": "@astrojs/ts-plugin"
@@ -8,4 +9,3 @@
     ]
   }
 }
-
