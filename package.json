@@ -13,11 +13,14 @@
     "@astrojs/check": "^0.5.10",
     "@astrojs/node": "^8.2.5",
     "@astrojs/ts-plugin": "^1.6.1",
+    "@fastify/cors": "^9.0.1",
     "@fastify/middie": "^8.3.0",
     "@fastify/static": "^7.0.3",
+    "@prisma/client": "^5.13.0",
     "astro": "^4.7.0",
     "discord.js": "^14.14.1",
     "fastify": "^4.26.2",
+    "fastify-plugin": "^4.5.1",
     "pino": "^9.0.0",
     "pino-pretty": "^11.0.0",
     "typescript": "^5.4.5"
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@types/bun": "^1.1.0",
     "@types/cssesc": "^3.0.2",
-    "@types/html-escaper": "^3.0.2"
+    "@types/html-escaper": "^3.0.2",
+    "prisma": "^5.13.0"
   }
 }

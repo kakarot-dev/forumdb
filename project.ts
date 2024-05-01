@@ -1,18 +1,42 @@
 import Fastify from "fastify";
-import fastifyMiddie from "@fastify/middie";
-import fastifyStatic from "@fastify/static";
-import { fileURLToPath } from "node:url";
+import logger from "./util/logger.ts";
+import { Partials, IntentsBitField } from "discord.js";
+import { ForumClient } from "./bot/client/forumdb";
+import setupPlugin from "./api/plugins/setup.ts";
 import { handler as ssrHandler } from "./dist/server/entry.mjs";
-import logger from "./app/util/logger.ts";
+
+logger.info("🔥 Loading Api 🔥");
 const app = Fastify({ logger });
-await app
-  .register(fastifyStatic, {
-    root: fileURLToPath(new URL("./dist/client", import.meta.url)),
-  })
-  .register(fastifyMiddie);
-app.use(ssrHandler);
+app.register(setupPlugin);
 app.log.info("🚀 Loaded Astro 🚀");
-app.listen({
-  host: Bun.env.HOST || "127.0.0.1",
-  port: parseInt(Bun.env.PORT || "3000"),
+
+logger.info("🤖 Loading Bot 🤖");
+const client = new ForumClient({
+  intents: [
+    IntentsBitField.Flags.Guilds,
+    IntentsBitField.Flags.GuildMessages,
+    IntentsBitField.Flags.GuildMessageReactions,
+    IntentsBitField.Flags.MessageContent,
+  ],
+  partials: [
+    Partials.User,
+    Partials.Message,
+    Partials.Channel,
+    Partials.GuildMember,
+    Partials.GuildScheduledEvent,
+    Partials.ThreadMember,
+    Partials.Reaction,
+  ],
+  allowedMentions: {
+    parse: ["users", "roles"],
+    repliedUser: true,
+  },
 });
+const start = async () => {
+  app.listen({
+    host: Bun.env.HOST || "127.0.0.1",
+    port: parseInt(Bun.env.PORT || "3000"),
+  });
+  client.connect(Bun.env.DISCORD_BOT_TOKEN!);
+};
+start();
