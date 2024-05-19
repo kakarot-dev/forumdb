@@ -3,7 +3,7 @@ import logger from "./util/logger.ts";
 import { Partials, IntentsBitField } from "discord.js";
 import { ForumClient } from "./bot/client/forumdb";
 import setupPlugin from "./api/plugins/setup.ts";
-import { handler as ssrHandler } from "./dist/server/entry.mjs";
+import "./prisma/conn.ts";
 
 logger.info("🔥 Loading Api 🔥");
 const app = Fastify({ logger });
@@ -28,11 +28,11 @@ const client = new ForumClient({
     Partials.Reaction,
   ],
   allowedMentions: {
-    parse: ["users", "roles"],
     repliedUser: true,
   },
 });
 const start = async () => {
+  client.db.connect();
   app.listen({
     host: Bun.env.HOST || "127.0.0.1",
     port: parseInt(Bun.env.PORT || "3000"),

@@ -1,5 +1,9 @@
 import { ForumClient } from "../client/forumdb";
-import type { CacheType, ChatInputCommandInteraction } from "discord.js";
+import type {
+  CacheType,
+  ChannelType,
+  ChatInputCommandInteraction,
+} from "discord.js";
 
 import type {
   ApplicationCommand,
@@ -54,6 +58,7 @@ export interface ICommandOptions {
   options?: ISubCommandOptions[];
   required?: boolean;
   type: number;
+  channel_types?: ChannelType[];
 }
 
 export interface ICommandChoices {

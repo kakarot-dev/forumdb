@@ -12,3 +12,10 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Guild {
+  id String @id
+  name String
+  description String @default("This guild has no description")
+  image String @default("https://cdn.discordapp.com/embed/avatars/0.png")
+}

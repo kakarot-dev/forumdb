@@ -15,5 +15,20 @@ export default fastifyPlugin(async function setupPlugin(app) {
   await app.register(fastifyStatic, {
     root: fileURLToPath(new URL("../../dist/client/", import.meta.url)),
   });
+
+  app.addHook("preHandler", (req, res, done) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS",
+    );
+    res.header(
+      "X-Powered-By",
+      "AssistifyAi Development <https://assistifyai.org>",
+    );
+    res.header("User-Agent", `ForumDB v1`);
+
+    done();
+  });
   app.use(ssrHandler);
 });
