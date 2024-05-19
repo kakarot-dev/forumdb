@@ -12,11 +12,7 @@ export default fastifyPlugin(async function setupPlugin(app) {
     origin: "*",
   });
 
-  await app.register(fastifyStatic, {
-    root: fileURLToPath(new URL("../../dist/client/", import.meta.url)),
-  });
-
-  app.addHook("preHandler", (req, res, done) => {
+  app.addHook("preHandler", (_req, res, done) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Methods",
@@ -30,5 +26,10 @@ export default fastifyPlugin(async function setupPlugin(app) {
 
     done();
   });
+  await app.register(fastifyStatic, {
+    root: fileURLToPath(new URL("../../dist/client/", import.meta.url)),
+  });
+
+  await app.register(import("../routes/index.ts"));
   app.use(ssrHandler);
 });

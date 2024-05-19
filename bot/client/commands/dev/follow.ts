@@ -27,6 +27,12 @@ export default class FollowCommand extends CommandTemplate {
           required: true,
           channel_types: [ChannelType.GuildForum],
         },
+        {
+          name: "include_archives",
+          description: "Should archived threads be indexed?",
+          type: OptionTypes.Boolean,
+          required: true,
+        },
       ],
     });
   }

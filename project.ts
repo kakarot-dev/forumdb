@@ -7,7 +7,7 @@ import "./prisma/conn.ts";
 
 logger.info("🔥 Loading Api 🔥");
 const app = Fastify({ logger });
-app.register(setupPlugin);
+await app.register(setupPlugin);
 app.log.info("🚀 Loaded Astro 🚀");
 
 logger.info("🤖 Loading Bot 🤖");
