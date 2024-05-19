@@ -40,5 +40,7 @@ export default class FollowCommand extends CommandTemplate {
   public async exec(
     bot: ForumClient,
     interaction: ChatInputCommandInteraction<CacheType>,
-  ): Promise<void> {}
+  ): Promise<void> {
+    // Check if guild exists
+  }
 }

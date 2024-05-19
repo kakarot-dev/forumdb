@@ -18,4 +18,31 @@ model Guild {
   name String
   description String @default("This guild has no description")
   image String @default("https://cdn.discordapp.com/embed/avatars/0.png")
+  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  channels Channel[]
+}
+
+model Channel {
+  id String @id
+  name String
+  topic String @default("This channel has no topic")
+  tags Tag[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  guild Guild @relation(fields: [guildId], references: [id])
+  guildId String
+}
+
+model Tag {
+  id String @id
+  name String
+  emoji String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  channel Channel @relation(fields: [channelId], references: [id])
+  channelId String
 }

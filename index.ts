@@ -3,13 +3,15 @@ import logger from "./util/logger.ts";
 import { Partials, IntentsBitField } from "discord.js";
 import { ForumClient } from "./bot/client/forumdb";
 import setupPlugin from "./api/plugins/setup.ts";
-import "./prisma/conn.ts";
+import { PrismaClient } from "@prisma/client";
 
 logger.info("🔥 Loading Api 🔥");
 const app = Fastify({ logger });
 await app.register(setupPlugin);
 app.log.info("🚀 Loaded Astro 🚀");
 
+export const prisma = new PrismaClient();
+logger.info("🔗 Connected to database 🔗 ");
 logger.info("🤖 Loading Bot 🤖");
 const client = new ForumClient({
   intents: [
@@ -32,7 +34,7 @@ const client = new ForumClient({
   },
 });
 const start = async () => {
-  client.db.connect();
+  prisma.$connect();
   app.listen({
     host: Bun.env.HOST || "127.0.0.1",
     port: parseInt(Bun.env.PORT || "3000"),

@@ -7,8 +7,6 @@ import { CommandHandler } from "../handlers/cmd";
 import { EventHandler } from "../handlers/event";
 import { DiscordAPI } from "../handlers/rest";
 import logger from "../../util/logger";
-import PrismaDB from "../../prisma/conn";
-import type { PrismaClient } from "@prisma/client";
 
 export class ForumClient extends Client {
   public cooldown = new Collection<string, Collection<string, number>>();
@@ -16,8 +14,6 @@ export class ForumClient extends Client {
   public rest_api = new DiscordAPI(this);
   public commands = new CommandHandler(this);
   public events = new EventHandler(this);
-  public db = new PrismaDB(this);
-  public prisma: PrismaClient = this.db.prisma;
   public logger = logger;
   public types = ClientTypes;
 
